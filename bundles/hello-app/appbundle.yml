@@ -1,0 +1,42 @@
+bundle_name: hello-bundle
+size: 15M
+application:
+  artifact_size: ""
+  name: Commmodity
+  description: Minimal hello application
+  version: 0.1.0
+  services:
+    - name: hello-app
+      image: # image is now a Yaml object for easier parsing into struct
+        repository: "localhost:5000/hello-app"
+        tag: "latest"
+        pullPolicy: "IfNotPresent"
+      description: hello application container
+      version: 0.1.0
+      dependencies: []
+      exposed_ports:
+        - "3004"
+      min_instances: 1
+      max_instances: 1
+      livenessprobe:
+        type: http
+        path: "/health"
+        port: 3004
+        interval: 10
+        timeout: 5
+        threshold: 3
+      readinessprobe:
+        type: http
+        path: "/health"
+        port: 3004
+        interval: 10
+        timeout: 5
+        threshold: 3
+      path: "/hello"
+      secrets: []
+      service:
+        type: ClusterIP
+        port: 3004
+      ingress:
+        enabled: true
+        path: /hello

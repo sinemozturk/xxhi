@@ -1,0 +1,11 @@
+replicaCount: 1
+image:
+  repository: localhost:5000/hello-app
+  tag: latest
+service:
+  type: ClusterIP
+  port: 3004
+ingress:
+  enabled: true
+  host: ""
+  path: /hello
