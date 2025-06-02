@@ -16,20 +16,20 @@ spec:
         - name: hello-app
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           ports:
-            - containerPort: {{ .Values.service.port }}
+            - containerPort: 80
           env:
             - name: PORT
-              value: "{{ .Values.service.port }}"
+              value: "80"
           # health checks 
           livenessProbe:
             httpGet:
               path: /health
-              port: {{ .Values.service.port }}
+              port: 80
             initialDelaySeconds: 5  # Wait 5s before first check
             periodSeconds: 10       # Check every 10s
           readinessProbe:
             httpGet:
               path: /health
-              port: {{ .Values.service.port }}
+              port: 80
             initialDelaySeconds: 2  # Faster initial check
             periodSeconds: 5        # Check every 5s

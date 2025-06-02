@@ -15,20 +15,20 @@ application:
       version: 0.1.0
       dependencies: []
       exposed_ports:
-        - "3004"
+        - "80"
       min_instances: 1
       max_instances: 1
       livenessprobe:
         type: http
         path: "/health"
-        port: 3004
+        port: 80
         interval: 10
         timeout: 5
         threshold: 3
       readinessprobe:
         type: http
         path: "/health"
-        port: 3004
+        port: 80
         interval: 10
         timeout: 5
         threshold: 3
@@ -36,7 +36,7 @@ application:
       secrets: []
       service:
         type: ClusterIP
-        port: 3004
+        port: 80
       ingress:
         enabled: true
         path: /hello
